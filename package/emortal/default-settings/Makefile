@@ -37,6 +37,7 @@ endef
 define Package/default-settings-chn/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/99-default-settings-chinese $(1)/etc/uci-defaults/
+	$(INSTALL_BIN) ./files/99-mikuwrt-defaults $(1)/etc/uci-defaults/
 endef
 
 $(eval $(call BuildPackage,default-settings))

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# === IPv6: SLAAC + RDNSS (DNS via RA, no DHCPv6) ===
+uci -q batch <<-SETV6
+	set dhcp.lan.ra='server'
+	set dhcp.lan.dhcpv6='disabled'
+	set dhcp.lan.ra_management='1'
+	set dhcp.lan.ra_dns='1'
+	add_list dhcp.lan.dns='2001:4860:4860::8888'
+	add_list dhcp.lan.dns='2001:4860:4860::8844'
+	commit dhcp
+SETV6
+
+# === LuCI: auto-refresh homepage stats + DHCP leases ===
+uci -q batch <<-SETREFRESH
+	set luci.main.pollinterval='3'
+	commit luci
+SETREFRESH
+
+exit 0

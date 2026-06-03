@@ -27,7 +27,7 @@ fi
 
 apk_mirror="$(uci -q get system.@imm_init[0].apk_mirror)"
 if [ -z "$apk_mirror" ]; then
-	apk_mirror="https://mirrors.vsean.net/openwrt"
+	apk_mirror="https://mirrors.tuna.tsinghua.edu.cn/immortalwrt"
 	uci -q batch <<-EOF
 		set system.@imm_init[0].apk_mirror="$apk_mirror"
 		commit system
