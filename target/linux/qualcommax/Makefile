@@ -34,6 +34,10 @@ DEFAULT_PACKAGES += \
 	kmod-qca-nss-drv-tunipip6 \
 	kmod-qca-nss-drv-vlan-mgr \
 	kmod-qca-nss-drv-vxlanmgr \
-	kmod-qca-nss-drv-wifi-meshmgr
+	kmod-qca-nss-drv-wifi-meshmgr \
+	kmod-usb-net kmod-usb-net-rndis kmod-usb-net-cdc-ether \
+	kmod-usb-net-qmi-wwan kmod-usb-serial-option usb-modeswitch \
+	luci-app-ttyd luci-theme-argon luci-app-argon-config \
+	kmod-sched-cake irqbalance
 
 $(eval $(call BuildTarget))
