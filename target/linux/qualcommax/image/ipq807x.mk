@@ -527,6 +527,7 @@ TARGET_DEVICES += xiaomi_ax3600
 define Device/xiaomi_ax3600-stock
 	$(call Device/xiaomi_ax3600)
 	DEVICE_VARIANT := (stock layout)
+	DEVICE_PACKAGES += -ath11k-firmware-ipq8074-ddwrt
 	DEVICE_ALT0_VENDOR := Xiaomi
 	DEVICE_ALT0_MODEL := AX3600
 	DEVICE_ALT0_VARIANT := (custom U-Boot layout)
