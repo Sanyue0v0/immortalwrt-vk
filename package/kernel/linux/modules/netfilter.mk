@@ -75,8 +75,9 @@ define KernelPackage/nf-ipt
   SUBMENU:=$(NF_MENU)
   TITLE:=Iptables core
   KCONFIG:=$(KCONFIG_NF_IPT)
-  FILES:=$(foreach mod,$(NF_IPT-m),$(LINUX_DIR)/net/$(mod).ko)
-  AUTOLOAD:=$(call AutoProbe,$(notdir $(NF_IPT-m)))
+  DEPENDS:=+!LINUX_6_12:kmod-iptables
+  FILES:=$(if $(CONFIG_LINUX_6_12),$(foreach mod,$(NF_IPT-m),$(LINUX_DIR)/net/$(mod).ko))
+  AUTOLOAD:=$(if $(CONFIG_LINUX_6_12),$(call AutoProbe,$(notdir $(NF_IPT-m))))
 endef
 
 $(eval $(call KernelPackage,nf-ipt))
