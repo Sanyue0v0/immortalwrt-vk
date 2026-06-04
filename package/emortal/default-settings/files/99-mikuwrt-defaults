@@ -14,22 +14,20 @@ uci -q batch <<-SETREFRESH
 	commit luci
 SETREFRESH
 
-# === LED: network LEDs follow WAN ===
+# === LED: WAN status ===
 uci -q batch <<-SETLED
 	delete system.led_network_yellow
 	delete system.led_network_blue
 	set system.led_network_yellow='led'
-	set system.led_network_yellow.name='WAN Link'
+	set system.led_network_yellow.name='WAN Off'
 	set system.led_network_yellow.sysfs='yellow:network'
-	set system.led_network_yellow.trigger='netdev'
-	set system.led_network_yellow.dev='wan'
-	set system.led_network_yellow.mode='link'
+	set system.led_network_yellow.trigger='default-on'
 	set system.led_network_blue='led'
-	set system.led_network_blue.name='WAN Activity'
+	set system.led_network_blue.name='WAN On'
 	set system.led_network_blue.sysfs='blue:network'
 	set system.led_network_blue.trigger='netdev'
 	set system.led_network_blue.dev='wan'
-	set system.led_network_blue.mode='tx rx'
+	set system.led_network_blue.mode='link'
 	commit system
 SETLED
 
