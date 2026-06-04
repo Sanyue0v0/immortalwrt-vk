@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /lib/functions.sh
+
 # === IPv6: SLAAC IP + DHCPv6 DNS (stateless) ===
 uci -q batch <<-SETV6
 	set dhcp.lan.ra='server'
@@ -15,20 +17,59 @@ uci -q batch <<-SETREFRESH
 SETREFRESH
 
 # === LED: WAN status ===
-uci -q batch <<-SETLED
-	delete system.led_network_yellow
-	delete system.led_network_blue
-	set system.led_network_yellow='led'
-	set system.led_network_yellow.name='WAN Off'
-	set system.led_network_yellow.sysfs='yellow:network'
-	set system.led_network_yellow.trigger='default-on'
-	set system.led_network_blue='led'
-	set system.led_network_blue.name='WAN On'
-	set system.led_network_blue.sysfs='blue:network'
-	set system.led_network_blue.trigger='netdev'
-	set system.led_network_blue.dev='wan'
-	set system.led_network_blue.mode='link'
-	commit system
-SETLED
+case "$(board_name)" in
+xiaomi,ax3600|xiaomi,ax3600-stock)
+	uci -q batch <<-SETLED
+		delete system.led_wan
+		delete system.led_network_yellow
+		delete system.led_network_blue
+		set system.led_network_yellow='led'
+		set system.led_network_yellow.name='WAN Off'
+		set system.led_network_yellow.sysfs='yellow:network'
+		set system.led_network_yellow.trigger='none'
+		set system.led_network_yellow.default='1'
+		set system.led_network_blue='led'
+		set system.led_network_blue.name='WAN On'
+		set system.led_network_blue.sysfs='blue:network'
+		set system.led_network_blue.trigger='netdev'
+		set system.led_network_blue.dev='wan'
+		set system.led_network_blue.mode='link'
+		commit system
+	SETLED
+
+	mkdir -p /etc/hotplug.d/iface /etc/hotplug.d/net
+	cat > /etc/hotplug.d/net/95-ax3600-wan-led <<'EOF'
+#!/bin/sh
+[ "$INTERFACE" = "wan" ] || [ "$DEVICE" = "wan" ] || exit 0
+
+yellow="yellow:network"
+[ -e "/sys/class/leds/$yellow/brightness" ] || exit 0
+
+carrier=0
+[ -r /sys/class/net/wan/carrier ] && read -r carrier < /sys/class/net/wan/carrier
+
+echo none > "/sys/class/leds/$yellow/trigger"
+if [ "$carrier" = "1" ]; then
+	echo 0 > "/sys/class/leds/$yellow/brightness"
+else
+	brightness=1
+	[ -r "/sys/class/leds/$yellow/max_brightness" ] && read -r brightness < "/sys/class/leds/$yellow/max_brightness"
+	echo "$brightness" > "/sys/class/leds/$yellow/brightness"
+fi
+EOF
+	cat > /etc/hotplug.d/iface/95-ax3600-wan-led <<'EOF'
+#!/bin/sh
+[ "$INTERFACE" = "wan" ] || exit 0
+
+case "$ACTION" in
+ifup|ifdown)
+	/etc/hotplug.d/net/95-ax3600-wan-led
+	;;
+esac
+EOF
+	chmod +x /etc/hotplug.d/net/95-ax3600-wan-led /etc/hotplug.d/iface/95-ax3600-wan-led
+	INTERFACE=wan /etc/hotplug.d/net/95-ax3600-wan-led
+	;;
+esac
 
 exit 0
