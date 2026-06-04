@@ -2,6 +2,15 @@
 
 . /lib/functions.sh
 
+# === LAN: default address and DHCP pool ===
+uci -q batch <<-SETLAN
+	set network.lan.ipaddr='10.0.0.1/24'
+	set dhcp.lan.start='2'
+	set dhcp.lan.limit='253'
+	commit network
+	commit dhcp
+SETLAN
+
 # === IPv6: SLAAC IP + DHCPv6 DNS (stateless) ===
 uci -q batch <<-SETV6
 	set dhcp.lan.ra='server'
