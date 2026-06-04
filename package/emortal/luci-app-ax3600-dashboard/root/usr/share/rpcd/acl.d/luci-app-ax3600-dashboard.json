@@ -1,0 +1,19 @@
+{
+	"luci-app-ax3600-dashboard": {
+		"description": "Grant access to AX3600 dashboard status data",
+		"read": {
+			"file": {
+				"/sys/module/qca_nss_drv": [ "stat" ],
+				"/sys/module/ecm": [ "stat" ],
+				"/sys/module/qca_nss_ecm": [ "stat" ]
+			},
+			"ubus": {
+				"file": [ "stat" ],
+				"network.device": [ "status" ],
+				"system": [ "board" ],
+				"uci": [ "get" ]
+			},
+			"uci": [ "turboacc" ]
+		}
+	}
+}

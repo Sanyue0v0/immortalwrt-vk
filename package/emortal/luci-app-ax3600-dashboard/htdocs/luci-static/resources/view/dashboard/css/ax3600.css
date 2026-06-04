@@ -1,0 +1,202 @@
+.ax3600-dashboard-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr) minmax(260px, .75fr);
+	gap: 14px;
+	margin-top: 14px;
+}
+
+.ax3600-card {
+	min-height: 188px;
+	padding: 18px;
+	border: 1px solid rgba(125, 139, 155, .16);
+	box-shadow: 0 16px 42px rgba(15, 23, 42, .08);
+	transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.ax3600-card:hover {
+	border-color: rgba(59, 130, 246, .28);
+	box-shadow: 0 20px 48px rgba(15, 23, 42, .12);
+	transform: translateY(-1px);
+}
+
+.ax3600-card-wide {
+	min-width: 0;
+}
+
+.ax3600-card-head {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.ax3600-card h3 {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 650;
+	line-height: 1.25;
+}
+
+.ax3600-eyebrow {
+	margin: 0 0 4px;
+	color: #64748b;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.ax3600-status-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 26px;
+	padding: 0 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.ax3600-ports {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(78px, 1fr));
+	gap: 10px;
+}
+
+.ax3600-port {
+	position: relative;
+	display: flex;
+	min-height: 112px;
+	min-width: 0;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 14px;
+	border: 1px solid rgba(148, 163, 184, .28);
+	border-radius: 8px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, .86), rgba(248, 250, 252, .72));
+	overflow: hidden;
+}
+
+.ax3600-port.is-up {
+	border-color: rgba(16, 185, 129, .35);
+}
+
+.ax3600-port-dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 999px;
+	background: #94a3b8;
+}
+
+.ax3600-port.is-up .ax3600-port-dot {
+	background: #10b981;
+	box-shadow: 0 0 0 4px rgba(16, 185, 129, .14);
+}
+
+.ax3600-port-name {
+	margin-top: 12px;
+	font-size: 20px;
+	font-weight: 750;
+	line-height: 1.1;
+}
+
+.ax3600-port-role,
+.ax3600-port-speed {
+	color: #64748b;
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 1.2;
+}
+
+.ax3600-metrics {
+	display: grid;
+	gap: 10px;
+}
+
+.ax3600-metric {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	min-height: 42px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: rgba(148, 163, 184, .10);
+}
+
+.ax3600-metric-label {
+	color: #64748b;
+	font-size: 13px;
+	font-weight: 650;
+}
+
+.ax3600-metric-value {
+	padding: 4px 8px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 750;
+	white-space: nowrap;
+}
+
+.ax3600-status-pill.is-good,
+.ax3600-metric.is-good .ax3600-metric-value {
+	color: #047857;
+	background: rgba(16, 185, 129, .12);
+}
+
+.ax3600-metric.is-muted .ax3600-metric-value {
+	color: #475569;
+	background: rgba(100, 116, 139, .12);
+}
+
+.ax3600-metric.is-warn .ax3600-metric-value {
+	color: #b45309;
+	background: rgba(245, 158, 11, .15);
+}
+
+@media (prefers-color-scheme: dark) {
+	.ax3600-card {
+		border-color: rgba(148, 163, 184, .16);
+		box-shadow: 0 16px 42px rgba(0, 0, 0, .22);
+	}
+
+	.ax3600-port {
+		border-color: rgba(148, 163, 184, .22);
+		background: linear-gradient(180deg, rgba(15, 23, 42, .72), rgba(2, 6, 23, .38));
+	}
+
+	.ax3600-eyebrow,
+	.ax3600-port-role,
+	.ax3600-port-speed,
+	.ax3600-metric-label {
+		color: #94a3b8;
+	}
+}
+
+@media (max-width: 1180px) {
+	.ax3600-dashboard-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 620px) {
+	.ax3600-ports {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.ax3600-card {
+		padding: 14px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ax3600-card {
+		transition: none;
+	}
+
+	.ax3600-card:hover {
+		transform: none;
+	}
+}
