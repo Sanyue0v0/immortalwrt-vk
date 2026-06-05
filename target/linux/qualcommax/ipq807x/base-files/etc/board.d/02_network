@@ -141,10 +141,23 @@ ipq807x_setup_macs()
 	[ -n "$label_mac" ] && ucidef_set_label_macaddr $label_mac
 }
 
+ipq807x_setup_credentials()
+{
+	local board="$1"
+
+	case "$board" in
+	xiaomi,ax3600|\
+	xiaomi,ax3600-stock)
+		ucidef_set_root_password_hash '$6$MikuWRT$vernNvx7JO/ZmoBMYyGvFFVSIeEK2UMDOgeAthcSoVSX5CxiCeeXbvThjFkR7HzDs.OTAB/F/3SsIzctoWvY31'
+		;;
+	esac
+}
+
 board_config_update
 board=$(board_name)
 ipq807x_setup_interfaces $board
 ipq807x_setup_macs $board
+ipq807x_setup_credentials $board
 board_config_flush
 
 exit 0
