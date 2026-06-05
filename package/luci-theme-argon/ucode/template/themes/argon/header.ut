@@ -34,7 +34,7 @@
 
 	//Custom settings
 	let mode = 'normal';
-	let bar_color = '#5e72e4';
+	let bar_color = '#39c5bb';
 	let primary, dark_primary, blur_radius, blur_radius_dark, blur_opacity, blur_opacity_dark;
 	const dark_css = readfile('/www/luci-static/argon/css/dark.css');
 	if (access('/etc/config/argon')) {

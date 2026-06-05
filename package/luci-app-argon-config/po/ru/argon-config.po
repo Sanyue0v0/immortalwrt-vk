@@ -12,12 +12,12 @@ msgid ""
 msgstr "0 — прозрачно, 1 — непрозрачно (рекомендуется: прозрачный 0 или полупрозрачный, предустановка: 0.5)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:91
-msgid "A HEX Color (default: #483d8b)."
-msgstr "HEX-цвет (родной: #483d8b)."
+msgid "A HEX Color (default: #00a6a6)."
+msgstr "HEX-цвет (родной: #00a6a6)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:67
-msgid "A HEX color (default: #5e72e4)."
-msgstr "HEX-цвет (родной: #5e72e4)."
+msgid "A HEX color (default: #39c5bb)."
+msgstr "HEX-цвет (родной: #39c5bb)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:155
 msgid "Action"

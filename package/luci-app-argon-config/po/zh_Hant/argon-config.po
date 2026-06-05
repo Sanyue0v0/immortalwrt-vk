@@ -22,12 +22,12 @@ msgid ""
 msgstr "0 全透明 - 1 不透明（建議：全透明 0 或半透明 0.5）"
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:91
-msgid "A HEX Color (default: #483d8b)."
-msgstr "十六進制顏色（預設 #483d8b）"
+msgid "A HEX Color (default: #00a6a6)."
+msgstr "十六進制顏色（預設 #00a6a6）"
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:67
-msgid "A HEX color (default: #5e72e4)."
-msgstr "十六進制顏色（預設 #5e72e4）"
+msgid "A HEX color (default: #39c5bb)."
+msgstr "十六進制顏色（預設 #39c5bb）"
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:155
 msgid "Action"
@@ -197,11 +197,11 @@ msgstr "有效的十六進制顏色值"
 #~ "preset: 0.5 )"
 #~ msgstr "0 全透明 - 1 不透明（建議：全透明 0，或半透明 0.5）"
 
-#~ msgid "A HEX Color ; ( Default: #483d8b )"
-#~ msgstr "十六進制顏色（預設 #483d8b）"
+#~ msgid "A HEX Color ; ( Default: #00a6a6 )"
+#~ msgstr "十六進制顏色（預設 #00a6a6）"
 
-#~ msgid "A HEX Color ; ( Default: #5e72e4 )"
-#~ msgstr "十六進制顏色（預設 #5e72e4）"
+#~ msgid "A HEX Color ; ( Default: #39c5bb )"
+#~ msgstr "十六進制顏色（預設 #39c5bb）"
 
 #~ msgid "Bing Wallpapers"
 #~ msgstr "Bing桌布"

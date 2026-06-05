@@ -23,12 +23,12 @@ msgid ""
 msgstr "0 transparente - 1 opaco; (Sugestão: transparente: 0 ou translúcido predefinido: 0.5)"
 
 #: applications/luci-app-argon-config/luasrc/model/cbi/argon-config.lua:92
-msgid "A HEX Color ; ( Default: #483d8b )"
-msgstr "Uma cor HEX; (Padrão: #483d8b)"
+msgid "A HEX Color ; ( Default: #00a6a6 )"
+msgstr "Uma cor HEX; (Padrão: #00a6a6)"
 
 #: applications/luci-app-argon-config/luasrc/model/cbi/argon-config.lua:72
-msgid "A HEX Color ; ( Default: #5e72e4 )"
-msgstr "Uma cor HEX; (Padrão: #5e72e4)"
+msgid "A HEX Color ; ( Default: #39c5bb )"
+msgstr "Uma cor HEX; (Padrão: #39c5bb)"
 
 #: applications/luci-app-argon-config/luasrc/controller/argon-config.lua:8
 #: applications/luci-app-argon-config/luasrc/model/cbi/argon-config.lua:53

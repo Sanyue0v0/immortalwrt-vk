@@ -13,12 +13,12 @@ msgstr "0 przezroczysty - 1 nieprzezroczysty (sugerowane: przezroczysty: 0 lub p
 "0.5)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:91
-msgid "A HEX Color (default: #483d8b)."
-msgstr "Kolor zapisany za pomocą kodu HEX (domyślnie: #483d8b)."
+msgid "A HEX Color (default: #00a6a6)."
+msgstr "Kolor zapisany za pomocą kodu HEX (domyślnie: #00a6a6)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:67
-msgid "A HEX color (default: #5e72e4)."
-msgstr "Kolor zapisany za pomocą kodu HEX (domyślnie: #5e72e4)."
+msgid "A HEX color (default: #39c5bb)."
+msgstr "Kolor zapisany za pomocą kodu HEX (domyślnie: #39c5bb)."
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:155
 msgid "Action"

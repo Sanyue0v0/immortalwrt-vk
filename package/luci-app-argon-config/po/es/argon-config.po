@@ -23,11 +23,11 @@ msgid ""
 msgstr ""
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:91
-msgid "A HEX Color (default: #483d8b)."
+msgid "A HEX Color (default: #00a6a6)."
 msgstr ""
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:67
-msgid "A HEX color (default: #5e72e4)."
+msgid "A HEX color (default: #39c5bb)."
 msgstr ""
 
 #: applications/luci-app-argon-config/htdocs/luci-static/resources/view/argon-config.js:155
@@ -202,11 +202,11 @@ msgstr ""
 #~ "0 transparente - 1 opaco; (Sugerencia: transparente: 0 o translúcido "
 #~ "preestablecido: 0.5)"
 
-#~ msgid "A HEX Color ; ( Default: #483d8b )"
-#~ msgstr "Un color HEX; (Predeterminado: #483d8b)"
+#~ msgid "A HEX Color ; ( Default: #00a6a6 )"
+#~ msgstr "Un color HEX; (Predeterminado: #00a6a6)"
 
-#~ msgid "A HEX Color ; ( Default: #5e72e4 )"
-#~ msgstr "Un color HEX; (Predeterminado: #5e72e4)"
+#~ msgid "A HEX Color ; ( Default: #39c5bb )"
+#~ msgstr "Un color HEX; (Predeterminado: #39c5bb)"
 
 #~ msgid "Bing Wallpapers"
 #~ msgstr "Fondos de Bing"

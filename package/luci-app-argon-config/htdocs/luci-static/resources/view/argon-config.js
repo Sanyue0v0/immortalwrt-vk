@@ -64,8 +64,8 @@ return view.extend({
 		o.default = 'normal';
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'primary', _('[Light mode] Primary Color'), _('A HEX color (default: #5e72e4).'))
-		o.default = '#5e72e4';
+		o = s.option(form.Value, 'primary', _('[Light mode] Primary Color'), _('A HEX color (default: #39c5bb).'))
+		o.default = '#39c5bb';
 		o.rmempty = false;
 		o.validate = function(section_id, value) {
 			if (section_id)
@@ -88,8 +88,8 @@ return view.extend({
 		o.rmempty = false;
 
 		o = s.option(form.Value, 'dark_primary', _('[Dark mode] Primary Color'),
-			_('A HEX Color (default: #483d8b).'))
-		o.default = '#483d8b';
+			_('A HEX Color (default: #00a6a6).'))
+		o.default = '#00a6a6';
 		o.rmempty = false;
 		o.validate = function(section_id, value) {
 			if (section_id)
