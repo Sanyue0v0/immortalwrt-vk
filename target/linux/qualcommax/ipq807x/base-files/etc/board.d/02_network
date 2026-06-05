@@ -53,6 +53,7 @@ ipq807x_setup_interfaces()
 	xiaomi,ax3600-stock)
 		ucidef_set_interface_wan "wan"
 		ucidef_set_interface_lan "lan1 lan2 lan3"
+		ucidef_set_country "CN"
 		;;
 	edimax,cax1800|\
 	netgear,wax218|\

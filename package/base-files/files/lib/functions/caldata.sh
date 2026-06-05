@@ -199,6 +199,8 @@ ath11k_remove_regdomain() {
 	local regdomain
 	local regdomain_data
 
+	[ -n "$target" ] || target=/lib/firmware/$FIRMWARE
+
 	regdomain=$(hexdump -v -n 2 -s 0x34 -e '1/1 "%02x"' $target)
 	caldata_patch_data "0000" 0x34 0xa "$target"
 
