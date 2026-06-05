@@ -909,11 +909,20 @@ mac80211_set_vif_txpower() {
 	json_select ..
 
 	set_default vif_txpower "$txpower"
-	if [ -n "$vif_txpower" ]; then
-		iw dev "$ifname" set txpower fixed "${vif_txpower%%.*}00"
-	else
-		iw dev "$ifname" set txpower auto
+	mac80211_set_txpower dev "$ifname" "$vif_txpower"
+}
+
+mac80211_set_txpower() {
+	local type="$1"
+	local name="$2"
+	local power="$3"
+
+	if [ -n "$power" ]; then
+		iw "$type" "$name" set txpower fixed "${power%%.*}00" >/dev/null 2>&1 && return
+		logger -t mac80211 "Failed to set $type $name txpower ${power%%.*} dBm; falling back to auto"
 	fi
+
+	iw "$type" "$name" set txpower auto >/dev/null 2>&1
 }
 
 wpa_supplicant_init_config() {
@@ -1231,11 +1240,7 @@ drv_mac80211_setup() {
 	json_set_namespace "$prev"
 
 	[ -z "$phy_suffix" ] && {
-		if [ -n "$txpower" ]; then
-			iw phy "$phy" set txpower fixed "${txpower%%.*}00"
-		else
-			iw phy "$phy" set txpower auto
-		fi
+		mac80211_set_txpower phy "$phy" "$txpower"
 	}
 
 	for_each_interface "ap sta adhoc mesh monitor" mac80211_set_vif_txpower
