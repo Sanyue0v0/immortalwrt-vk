@@ -64,17 +64,6 @@ function get_channel_frequency(band, channel) {
 	}
 }
 
-function set_phy_txpower(phy, txpower) {
-	if (!system(`iw phy ${phy} set txpower ${txpower}`))
-		return;
-
-	if (txpower == 'auto')
-		return;
-
-	log(`Failed to set '${phy}' txpower ${txpower}; falling back to auto`);
-	system(`iw phy ${phy} set txpower auto`);
-}
-
 function setup_phy(phy, config, data) {
 	if (config.channel == "auto")
 		config.channel = 0;
@@ -112,7 +101,7 @@ function setup_phy(phy, config, data) {
 	log(`Configuring '${phy}' txantenna: ${config.txantenna}, rxantenna: ${config.rxantenna} distance: ${config.distance}`);
 	system(`iw phy ${phy} set antenna ${config.txantenna} ${config.rxantenna}`);
 	system(`iw phy ${phy} set distance ${config.distance}`);
-	set_phy_txpower(phy, config.txpower);
+	system(`iw phy ${phy} set txpower ${config.txpower}`);
 
 	if (config.frag)
 		system(`iw phy ${phy} set frag ${config.frag}`);
