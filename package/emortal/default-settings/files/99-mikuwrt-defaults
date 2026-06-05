@@ -7,6 +7,7 @@ uci -q batch <<-SETLAN
 	set network.lan.ipaddr='10.0.0.1/24'
 	set dhcp.lan.start='2'
 	set dhcp.lan.limit='253'
+	set dhcp.@dnsmasq[0].sequential_ip='1'
 	commit network
 	commit dhcp
 SETLAN
@@ -27,6 +28,13 @@ uci -q batch <<-SETREFRESH
 	set luci.main.pollinterval='3'
 	commit luci
 SETREFRESH
+
+if uci -q get argon.@global[0] > /dev/null; then
+	uci -q batch <<-SETARGON
+		set argon.@global[0].online_wallpaper='none'
+		commit argon
+	SETARGON
+fi
 
 # === LED: WAN status ===
 case "$(board_name)" in

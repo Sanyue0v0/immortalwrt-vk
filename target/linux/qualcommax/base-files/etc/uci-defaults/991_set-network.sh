@@ -26,7 +26,6 @@ if [ -n "$ula_prefix" ]; then
 	uci set network.lan.ip6assign='64'
 	uci set network.lan.ip6ifaceid='eui64'
 	uci set network.globals.packet_steering='0'
-	uci del network.globals.ula_prefix
 
 	uci commit network
 fi

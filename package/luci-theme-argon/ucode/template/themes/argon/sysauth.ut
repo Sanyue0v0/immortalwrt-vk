@@ -50,7 +50,7 @@
 	}
 
 	function selectBackground(themeDir) {
-		let bgUrl = media + "/img/bg1.jpg";
+		let bgUrl = media + "/img/bg1.webp";
 		let backgroundType = "Image";
 		let mimeType = "";
 
