@@ -10,10 +10,8 @@
 			"ubus": {
 				"file": [ "stat" ],
 				"network.device": [ "status" ],
-				"system": [ "board" ],
-				"uci": [ "get" ]
-			},
-			"uci": [ "turboacc" ]
+				"system": [ "board" ]
+			}
 		}
 	}
 }

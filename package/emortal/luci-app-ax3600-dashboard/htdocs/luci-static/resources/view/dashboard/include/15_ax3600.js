@@ -2,7 +2,6 @@
 'require baseclass';
 'require fs';
 'require rpc';
-'require uci';
 
 var callSystemBoard = rpc.declare({
 	object: 'system',
@@ -34,18 +33,8 @@ function isAx3600(board) {
 	return /AX3600/i.test(model) || compat.indexOf('xiaomi,ax3600') > -1 || compat.indexOf('xiaomi,ax3600-stock') > -1;
 }
 
-function boolLabel(value) {
-	return value ? _('On') : _('Off');
-}
-
 function statusClass(ok) {
 	return ok ? 'is-good' : 'is-muted';
-}
-
-function readTurboFlag(section, option) {
-	var value = uci.get('turboacc', section, option);
-
-	return value === '1' || value === 'true' || value === true;
 }
 
 function renderMetric(label, value, state) {
@@ -80,8 +69,7 @@ return baseclass.extend({
 			Promise.all([
 				L.resolveDefault(fs.stat('/sys/module/ecm'), null),
 				L.resolveDefault(fs.stat('/sys/module/qca_nss_ecm'), null)
-			]),
-			L.resolveDefault(uci.load('turboacc'), null)
+			])
 		]);
 	},
 
@@ -90,7 +78,6 @@ return baseclass.extend({
 		var statuses = data[1] || [];
 		var nssLoaded = !!data[2];
 		var ecmLoaded = !!(data[3] && (data[3][0] || data[3][1]));
-		var turboSection = 'config';
 		var ports = [
 			{ name: 'wan', label: 'WAN', role: _('Uplink'), status: statuses[0] },
 			{ name: 'lan1', label: 'LAN1', role: _('LAN'), status: statuses[1] },
@@ -100,12 +87,6 @@ return baseclass.extend({
 
 		if (!isAx3600(board))
 			return null;
-
-		var hwFlow = readTurboFlag(turboSection, 'hw_flow');
-		var swFlow = readTurboFlag(turboSection, 'sw_flow');
-		var fullcone = readTurboFlag(turboSection, 'fullcone_nat');
-		var fullcone6 = readTurboFlag(turboSection, 'fullcone6');
-		var bbr = readTurboFlag(turboSection, 'bbr_cca');
 
 		return E('div', { 'class': 'ax3600-dashboard-grid fade-in' }, [
 			E('section', { 'class': 'dashboard-bg box-s1 ax3600-card ax3600-card-wide' }, [
@@ -128,23 +109,7 @@ return baseclass.extend({
 				]),
 				E('div', { 'class': 'ax3600-metrics' }, [
 					renderMetric(_('NSS driver'), nssLoaded ? _('Available') : _('Unavailable'), statusClass(nssLoaded)),
-					renderMetric(_('ECM'), ecmLoaded ? _('Available') : _('Unavailable'), statusClass(ecmLoaded)),
-					renderMetric(_('Turbo ACC'), bbr ? _('BBR only') : _('UI only'), bbr ? 'is-good' : 'is-muted')
-				])
-			]),
-
-			E('section', { 'class': 'dashboard-bg box-s1 ax3600-card' }, [
-				E('div', { 'class': 'ax3600-card-head' }, [
-					E('div', {}, [
-					E('p', { 'class': 'ax3600-eyebrow' }, _('Offload policy')),
-					E('h3', {}, _('NSS + gaming profile'))
-					])
-				]),
-				E('div', { 'class': 'ax3600-metrics' }, [
-					renderMetric(_('Software flow'), boolLabel(swFlow), swFlow ? 'is-warn' : 'is-good'),
-					renderMetric(_('Hardware flow'), boolLabel(hwFlow), hwFlow ? 'is-warn' : 'is-good'),
-					renderMetric(_('Full cone NAT'), boolLabel(fullcone), fullcone ? 'is-good' : 'is-muted'),
-					renderMetric(_('IPv6 full cone'), boolLabel(fullcone6), fullcone6 ? 'is-good' : 'is-muted')
+					renderMetric(_('ECM'), ecmLoaded ? _('Available') : _('Unavailable'), statusClass(ecmLoaded))
 				])
 			])
 		]);

@@ -11,11 +11,14 @@ uci -q batch <<-SETLAN
 	commit dhcp
 SETLAN
 
-# === IPv6: SLAAC IP + DHCPv6 DNS (stateless) ===
+# === IPv6: SLAAC + RA DNS, no DHCPv6 server ===
 uci -q batch <<-SETV6
 	set dhcp.lan.ra='server'
-	set dhcp.lan.dhcpv6='server'
-	set dhcp.lan.ra_management='2'
+	set dhcp.lan.dhcpv6='disabled'
+	set dhcp.lan.ra_slaac='1'
+	delete dhcp.lan.ra_flags
+	delete dhcp.lan.ra_management
+	delete dhcp.odhcpd
 	commit dhcp
 SETV6
 

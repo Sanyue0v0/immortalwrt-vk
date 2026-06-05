@@ -33,6 +33,8 @@ case "$FIRMWARE" in
 	redmi,ax6|\
 	redmi,ax6-stock|\
 	tplink,deco-x80-5g|\
+	xiaomi,ax3600|\
+	xiaomi,ax3600-stock|\
 	xiaomi,ax9000|\
 	xiaomi,ax9000-stock|\
 	yuncore,ax880|\
@@ -43,11 +45,6 @@ case "$FIRMWARE" in
 	zyxel,nwa110ax|\
 	zyxel,nwa210ax)
 		caldata_extract "0:art" 0x1000 0x20000
-		;;
-	xiaomi,ax3600|\
-	xiaomi,ax3600-stock)
-		caldata_extract "0:art" 0x1000 0x20000
-		ath11k_remove_regdomain
 		;;
 	linksys,homewrk|\
 	linksys,mx4200v1|\
