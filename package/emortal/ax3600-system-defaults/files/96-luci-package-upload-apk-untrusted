@@ -1,0 +1,29 @@
+#!/bin/sh
+
+pm_js="/www/luci-static/resources/view/package-manager.js"
+pm_call="/usr/libexec/package-manager-call"
+
+if [ -f "$pm_js" ] &&
+	grep -q "const argv = \\[ cmd \\];" "$pm_js" &&
+	! grep -q "pkg === '/tmp/upload.apk'" "$pm_js"; then
+	tmp="${pm_js}.tmp"
+	awk '
+		{
+			print
+			if (!done && $0 ~ /const argv = \[ cmd \];/) {
+				print ""
+				print "\t\tif (cmd === '\''install'\'' && L.hasSystemFeature('\''apk'\'') && pkg === '\''/tmp/upload.apk'\'')"
+				print "\t\t\targv.push('\''--allow-untrusted'\'');"
+				done = 1
+			}
+		}
+	' "$pm_js" > "$tmp" && mv "$tmp" "$pm_js"
+fi
+
+if [ -f "$pm_call" ] &&
+	grep -q -- "--force-overwrite)" "$pm_call" &&
+	! grep -q -- "--allow-untrusted" "$pm_call"; then
+	sed -i 's/--force-overwrite)/--allow-untrusted|--force-overwrite)/' "$pm_call"
+fi
+
+exit 0

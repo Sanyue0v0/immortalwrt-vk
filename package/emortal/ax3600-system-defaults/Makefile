@@ -3,7 +3,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ax3600-system-defaults
-PKG_RELEASE:=3
+PKG_RELEASE:=4
 
 PKG_LICENSE:=GPL-2.0-only
 
@@ -23,6 +23,7 @@ endef
 define Package/ax3600-system-defaults/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/95-ax3600-nss-defaults $(1)/etc/uci-defaults/
+	$(INSTALL_BIN) ./files/96-luci-package-upload-apk-untrusted $(1)/etc/uci-defaults/
 endef
 
 $(eval $(call BuildPackage,ax3600-system-defaults))

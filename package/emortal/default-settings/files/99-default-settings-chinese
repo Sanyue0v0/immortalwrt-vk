@@ -27,7 +27,7 @@ fi
 
 apk_mirror="$(uci -q get system.@imm_init[0].apk_mirror)"
 if [ -z "$apk_mirror" ]; then
-	apk_mirror="https://mirrors.tuna.tsinghua.edu.cn/immortalwrt"
+	apk_mirror="https://mirrors.pku.edu.cn/immortalwrt"
 	uci -q batch <<-EOF
 		set system.@imm_init[0].apk_mirror="$apk_mirror"
 		commit system
@@ -35,5 +35,9 @@ if [ -z "$apk_mirror" ]; then
 fi
 
 sed -i.bak "s,https://downloads.immortalwrt.org,$apk_mirror,g" "/etc/apk/repositories.d/distfeeds.list"
+sed -i \
+	-e '\,/nss_packages/packages\.adb$,d' \
+	-e '\,/openclash/packages\.adb$,d' \
+	"/etc/apk/repositories.d/distfeeds.list"
 
 exit 0
